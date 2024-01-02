@@ -276,15 +276,15 @@ Cố gắng tuân thủ nguyên tắc SOLID (Single Responsibility Principle, Op
 - **Tránh quá nhiều tham số trong hàm tạo**
 
 Hạn chế số lượng tham số trong hàm tạo để giữ nó ngắn gọn và dễ hiểu.
-```javascript
-// Không tốt
+```Cpp
+// ❌ Không tốt
 class Product {
     constructor(name, price, category, manufacturer, weight, quantity) {
         //...
     }
 }
 
-// Tốt
+// ✅ Tốt
 class Product {
     constructor(name, price, category) {
         //...
@@ -295,7 +295,7 @@ class Product {
 - **Sử dụng kế thừa và giao tiếp một cách chín chắn**
 
 Tận dụng kế thừa khi có mối quan hệ "is-a" (là một), và sử dụng giao tiếp (interface) khi có mối quan hệ "has-a" (có một).
-```javascript
+```Cpp
 // Kế thừa (is-a)
 class Shape {
     //...
@@ -320,8 +320,8 @@ class Car {
 - **Ngắn gọn và chỉ thực hiện một nhiệm vụ**
 
 Mỗi class nên có một mục đích cụ thể và thực hiện duy nhất một nhiệm vụ. Tránh "god class" có quá nhiều trách nhiệm.
-```javascript
-// Không tốt
+```Cpp
+// ❌ Không tốt
 class OrderProcessing {
     processOrder() {
         //...
@@ -336,7 +336,7 @@ class OrderProcessing {
     }
 }
 
-// Tốt
+// ✅ Tốt
 class OrderProcessor {
     processOrder() {
         //...
@@ -354,4 +354,149 @@ class EmailSender {
         //...
     }
 }
+```
+
+## 5. Cách clean code khi sử dụng struct
+
+- **Sử dụng Tên Mô Tả**
+
+Tên của struct nên mô tả chính xác mục đích hoặc chức năng của nó.
+
+```Cpp
+// ❌ Không tốt
+struct Data {
+    //...
+};
+
+// ✅ Tốt
+struct UserData {
+    //...
+};
+
+```
+
+- **Áp Dụng Nguyên Tắc Single Responsibility**
+
+Struct nên thực hiện một nhiệm vụ cụ thể và không nên chịu trách nhiệm quá mức.
+```Cpp
+// ❌ Không tốt
+struct FileData {
+    readFromFile() {
+        //...
+    }
+
+    writeToFile() {
+        //...
+    }
+};
+
+// ✅ Tốt
+struct FileReader {
+    readFromFile() {
+        //...
+    }
+};
+
+struct FileWriter {
+    writeToFile() {
+        //...
+    }
+};
+
+```
+
+- **Không Sử Dụng Cấu Trúc Như Class**
+
+Struct thường được sử dụng cho các cấu trúc dữ liệu đơn giản và nên tránh sử dụng chúng giống như class.
+```Cpp
+// ❌ Không tốt
+struct Point {
+    int x;
+    int y;
+    void move(int newX, int newY) {
+        x = newX;
+        y = newY;
+    }
+};
+
+// ✅ Tốt
+struct Point {
+    int x;
+    int y;
+};
+void movePoint(Point& point, int newX, int newY) {
+    point.x = newX;
+    point.y = newY;
+}
+
+```
+
+- **Đặt Các Thuộc Tính ở Đầu**
+
+Đặt các thuộc tính của struct ở đầu giúp dễ đọc và hiểu cấu trúc.
+```Cpp
+// ✅ Tốt
+struct UserData {
+    void printData() {
+        //...
+    }
+    int age;
+    std::string name;
+};
+
+// Tốt
+struct UserData {
+    int age;
+    std::string name;
+    void printData() {
+        //...
+    }
+};
+```
+
+- **Dùng Tính Chất Bất Biến Nếu Có Thể**
+
+Nếu có thể, hãy sử dụng tính chất bất biến để đảm bảo rằng dữ liệu trong struct không thay đổi sau khi được khởi tạo.
+```Cpp
+// Bất biến
+struct Point {
+    const int x;
+    const int y;
+    Point(int x, int y) : x(x), y(y) {}
+};
+```
+
+- **Đảm Bảo Cấu Trúc Thực Hiện Một Nhiệm Vụ Cụ Thể**
+
+Mỗi struct nên thực hiện một nhiệm vụ cụ thể, và không nên có quá nhiều chức năng.
+```Cpp
+// ❌ Không tốt
+struct File {
+    std::string name;
+    int size;
+    void readFromFile() {
+        //...
+    }
+    void writeToFile() {
+        //...
+    }
+};
+
+// ✅ Tốt
+struct FileInfo {
+    std::string name;
+    int size;
+};
+
+struct FileReader {
+    void readFromFile(FileInfo& file) {
+        //...
+    }
+};
+
+struct FileWriter {
+    void writeToFile(FileInfo& file) {
+        //...
+    }
+};
 ```
