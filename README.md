@@ -500,3 +500,25 @@ struct FileWriter {
     }
 };
 ```
+
+## 6. Cách clean code khi sử dụng component
+
+- **Chia Components Thành Các Phần Nhỏ (Atomic Components)**
+
+Chia components thành các phần nhỏ giúp giảm độ phức tạp của mỗi component và làm cho chúng dễ bảo trì và tái sử dụng hơn.
+
+- **Tránh Sự Phụ Thuộc Lẫn Nhau (Interdependence)**
+
+Phụ thuộc lẫn nhau có thể tạo ra vấn đề khi bạn cố gắng tái sử dụng components hoặc khi cần thay đổi một phần nhỏ mà phải cập nhật nhiều components liên quan.
+
+- **Dùng Stateless Components Khi Có Thể**
+
+Stateless components không quản lý trạng thái và thường ít phức tạp hơn, làm cho chúng dễ hiểu và dễ tái sử dụng.
+
+- **Tuân Thủ Quy ước (Conventions)**
+
+Tuân thủ quy ước giúp đảm bảo rằng mã nguồn của bạn sẽ được đồng nhất với các dự án khác và dễ hiểu hơn đối với cả bạn và đồng đội.
+
+- **Nguyên Tắc Single Responsibility**
+
+Mỗi component chỉ nên đảm nhận một trách nhiệm duy nhất, giúp giữ cho code dễ hiểu và tái sử dụng.
