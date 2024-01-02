@@ -246,13 +246,13 @@ Comments nên tập trung vào giải thích những điều khó hiểu hoặc 
 Comments nên được viết ngắn gọn và rõ ràng để dễ đọc. Sử dụng tiếng Anh để giữ tính nhất quán trong mã nguồn.
 
 ```javascript
-// Không tốt
+// ❌ Không tốt
 // Loop through the array to find the maximum value
 for (let i = 0; i < array.length; i++) {
   //...
 }
 
-// Tốt
+// ✅ Tốt
 // Find the maximum value by iterating through the array
 for (let i = 0; i < array.length; i++) {
   //...
@@ -266,3 +266,92 @@ Comments nên được cập nhật khi có sự thay đổi trong mã nguồn �
 - **Dùng để giải thích tại sao chứ không phải làm gì**
 
 Comments nên giải thích tại sao một phần mã nguồn được thực hiện như vậy thay vì mô tả nó làm gì.
+
+## 4. Cách clean code khi sử dụng class
+
+- **Nguyên tắc SOLID**
+
+Cố gắng tuân thủ nguyên tắc SOLID (Single Responsibility Principle, Open/Closed Principle, Liskov Substitution Principle, Interface Segregation Principle, Dependency Inversion Principle).
+
+- **Tránh quá nhiều tham số trong hàm tạo**
+
+Hạn chế số lượng tham số trong hàm tạo để giữ nó ngắn gọn và dễ hiểu.
+```javascript
+// Không tốt
+class Product {
+    constructor(name, price, category, manufacturer, weight, quantity) {
+        //...
+    }
+}
+
+// Tốt
+class Product {
+    constructor(name, price, category) {
+        //...
+    }
+}
+```
+
+- **Sử dụng kế thừa và giao tiếp một cách chín chắn**
+
+Tận dụng kế thừa khi có mối quan hệ "is-a" (là một), và sử dụng giao tiếp (interface) khi có mối quan hệ "has-a" (có một).
+```javascript
+// Kế thừa (is-a)
+class Shape {
+    //...
+}
+
+class Circle extends Shape {
+    //...
+}
+
+// Giao tiếp (has-a)
+class Engine {
+    //...
+}
+
+class Car {
+    constructor(engine) {
+        this.engine = engine;
+    }
+}
+```
+
+- **Ngắn gọn và chỉ thực hiện một nhiệm vụ**
+
+Mỗi class nên có một mục đích cụ thể và thực hiện duy nhất một nhiệm vụ. Tránh "god class" có quá nhiều trách nhiệm.
+```javascript
+// Không tốt
+class OrderProcessing {
+    processOrder() {
+        //...
+    }
+
+    generateInvoice() {
+        //...
+    }
+
+    sendConfirmationEmail() {
+        //...
+    }
+}
+
+// Tốt
+class OrderProcessor {
+    processOrder() {
+        //...
+    }
+}
+
+class InvoiceGenerator {
+    generateInvoice() {
+        //...
+    }
+}
+
+class EmailSender {
+    sendConfirmationEmail() {
+        //...
+    }
+}
+```
