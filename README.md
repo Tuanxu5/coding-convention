@@ -522,3 +522,121 @@ Tuân thủ quy ước giúp đảm bảo rằng mã nguồn của bạn sẽ đ
 - **Nguyên Tắc Single Responsibility**
 
 Mỗi component chỉ nên đảm nhận một trách nhiệm duy nhất, giúp giữ cho code dễ hiểu và tái sử dụng.
+
+## 7. Cách clean code khi sử dụng package
+
+- **Tách Từng Phần Công Việc**
+
+Phân chia dự án thành các gói chức năng giúp tăng tính rõ ràng và tái sử dụng, đồng thời giảm sự phụ thuộc giữa các phần khác nhau.
+```lua
+src/lua
+|-- utils/
+|   |-- stringUtils.js
+|   |-- numberUtils.js
+|
+|-- components/
+|   |-- button.js
+|   |-- modal.js
+|
+|-- services/
+|   |-- apiService.js
+|   |-- authService.js
+```
+
+- **Đặt Tên Rõ Ràng và Mô Tả**
+
+Tên rõ ràng giúp người đọc hiểu được chức năng của gói và các tệp tin mà không cần xem chi tiết.
+```lua
+src/
+|-- utilities/
+|   |-- stringUtils.js
+|   |-- numberUtils.js
+|
+|-- ui-components/
+|   |-- button.js
+|   |-- modal.js
+|
+|-- services/
+|   |-- apiService.js
+|   |-- authService.js
+```
+
+- **Package không nên quá lớn**
+
+Package quá lớn có thể làm giảm tính linh hoạt, khó bảo trì và tăng sự phụ thuộc.
+```lua
+src/
+|-- featureA/
+|   |-- moduleA/
+|   |   |-- ...
+|   |
+|   |-- moduleB/
+|   |   |-- ...
+|
+|-- featureB/
+|   |-- moduleC/
+|   |   |-- ...
+|   |
+|   |-- moduleD/
+|   |   |-- ...
+
+```
+
+- **Phân Chia Tệp Tin Một Cách Logic**
+
+Phân chia tệp tin một cách có tổ chức giúp làm cho mã nguồn dễ đọc và bảo trì.
+```lua
+src/
+|-- featureA/
+|   |-- moduleA/
+|   |   |-- moduleA.js
+|   |   |-- moduleA.test.js
+|   |
+|   |-- moduleB/
+|   |   |-- moduleB.js
+|   |   |-- moduleB.test.js
+|
+|-- featureB/
+|   |-- moduleC/
+|   |   |-- moduleC.js
+|   |   |-- moduleC.test.js
+|   |
+|   |-- moduleD/
+|   |   |-- moduleD.js
+|   |   |-- moduleD.test.js
+```
+
+- **Bao Gồm Một Tệp README.md**
+
+README.md là một tài liệu quan trọng giúp người sử dụng hiểu rõ về gói và cách sử dụng nó.
+```markdown
+# My Utility Library
+
+A collection of utility functions for string and number manipulation.
+
+## Installation
+```
+
+- **Cấu trúc thư mục có tổ chức giúp làm cho dự án trở nên có hệ thống và dễ quản lý.**
+
+Mỗi struct nên thực hiện một nhiệm vụ cụ thể, và không nên có quá nhiều chức năng.
+```lua
+src/
+|-- components/
+|   |-- button/
+|   |   |-- Button.js
+|   |   |-- Button.test.js
+|   |
+|   |-- modal/
+|       |-- Modal.js
+|       |-- Modal.test.js
+|
+|-- services/
+|   |-- api/
+|   |   |-- ApiService.js
+|   |   |-- ApiService.test.js
+|   |
+|   |-- auth/
+|       |-- AuthService.js
+|       |-- AuthService.test.js
+```
